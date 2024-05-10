@@ -1,30 +1,29 @@
 import React from 'react';
 import { StyleSheet,View, Text, Image, TouchableOpacity} from 'react-native';
-
-
-
 export default function CabecalhoPedidos() {
   return (
-    <View style={styles.container_header}>
-        <View style={styles.nav}>
-            <TouchableOpacity>
+    <View style={{borderWidth: 1}}>
+        <View style={styles.container_header}>
+            <View style={styles.nav}>
+                <TouchableOpacity>
+                    <Image
+                        source={require('../../../../assets/Pedidos.png')}
+                        resizeMode="contain"> 
+                    </Image>
+                </TouchableOpacity>
+                <TouchableOpacity>
+                    <Image
+                        source={require('../../../../assets/mesas.png')}
+                        resizeMode="contain"> 
+                    </Image>
+                </TouchableOpacity>
+            </View>
                 <Image
-                    source={require('../../../../assets/Pedidos.png')}
+                    source={require('../../../../assets/miniLogo.png')}
+                    style={{ width: 100}}
                     resizeMode="contain"> 
                 </Image>
-            </TouchableOpacity>
-            <TouchableOpacity>
-                <Image
-                    source={require('../../../../assets/mesas.png')}
-                    resizeMode="contain"> 
-                </Image>
-            </TouchableOpacity>
         </View>
-            <Image
-                source={require('../../../../assets/miniLogo.png')}
-                style={{ width: 100}}
-                resizeMode="contain"> 
-            </Image>
     </View>
   );
 }
