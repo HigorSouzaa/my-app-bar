@@ -1,12 +1,19 @@
 import React, { useState } from 'react';
 import { StyleSheet, View, Text, Image, TouchableOpacity } from 'react-native';
 import PopUp from '../PopUp/popUp';
+import { useNavigation } from '@react-navigation/native';
 
 export default function Cabecalho() {
+
+    const navigation = useNavigation();
+    const onPressNavFazerPedidos = () => {
+        navigation.navigate('TelaFazerPedidos')
+    } 
+
     return (
         <View style={styles.container_header}>
             <View style={styles.nav}>
-                <TouchableOpacity>
+                <TouchableOpacity onPress={onPressNavFazerPedidos}>
                     <Image
                         source={require('../../../../assets/Pedidos.png')}
                         resizeMode="contain"

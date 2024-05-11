@@ -1,8 +1,11 @@
 import React from 'react';
 import { StyleSheet,View, Text, Image, TouchableOpacity} from 'react-native';
+import PopUp from './PopUp/popUp';
+
+
 export default function CabecalhoPedidos() {
   return (
-    <View style={{borderWidth: 1}}>
+    <View style={{height: 140, justifyContent: "flex-end"}}>
         <View style={styles.container_header}>
             <View style={styles.nav}>
                 <TouchableOpacity>
@@ -11,12 +14,7 @@ export default function CabecalhoPedidos() {
                         resizeMode="contain"> 
                     </Image>
                 </TouchableOpacity>
-                <TouchableOpacity>
-                    <Image
-                        source={require('../../../../assets/mesas.png')}
-                        resizeMode="contain"> 
-                    </Image>
-                </TouchableOpacity>
+                <PopUp></PopUp>
             </View>
                 <Image
                     source={require('../../../../assets/miniLogo.png')}

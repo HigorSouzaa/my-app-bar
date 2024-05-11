@@ -9,7 +9,7 @@ const Stack = createStackNavigator();
 
 function MyStack() {
   return (
-      <Stack.Navigator initialRouteName="TelaFazerPedidos" screenOptions={{
+      <Stack.Navigator initialRouteName="Main" screenOptions={{
         headerShown: false,
       }}>
         <Stack.Screen name="Main" component={Main} />

@@ -23,7 +23,7 @@ import {
     <>
       <TouchableOpacity onPress={() => setVisible(true)}>
         <Image
-          source={require('../../../../assets/mesas.png')}
+          source={require('../../../../../assets/mesas.png')}
           resizeMode="contain">
         </Image>
       </TouchableOpacity>
@@ -51,7 +51,7 @@ import {
               <TouchableOpacity onPress={fecharModal}>
                 <View style={styles.btFechar}>
                   <Image
-                    source={require('../../../../assets/x.png')}
+                    source={require('../../../../../assets/x.png')}
                     resizeMode="contain"
                     style={{width:25}}>
                   </Image>
