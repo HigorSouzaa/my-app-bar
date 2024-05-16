@@ -1,7 +1,51 @@
-import React from 'react';
+import React, {useState} from 'react';
 import { StyleSheet,View, Text, Image, TouchableOpacity, TextInput, Button} from 'react-native';
+import db from '../../../../services/firebaseConfig';
+import {addDoc, collection, query, where, getDocs} from 'firebase/firestore'
+
 
 export default function Inputs() {
+    const [numeroPedido, setNumeroPedido] = useState('');
+    const [numeroMesa, setNumeroMesa] = useState('');
+    const [quantidade, setQuantidade] = useState('');
+    const [nomePedido, setNomePedido] = useState('');
+    const [valorPedido, setValorPedido] = useState('');
+
+    const onPressFazerPedido = async () => {
+        try {
+            const q = query(collection(db, "Cardapio"), where("NumPedido", "==", numeroPedido));
+            const querySnapshot = await getDocs(q);
+            
+            querySnapshot.forEach((doc) => {
+                const data = doc.data([0]);
+                setNomePedido(data.Nome);
+                setValorPedido(data.Valor);
+            });
+
+            const docData = {
+                NumPedido: numeroPedido,
+                Mesa: numeroMesa,
+                Quantidade: quantidade,
+                NomePedido: nomePedido,
+                ValorPedido: valorPedido
+            };
+
+            await addDoc(collection(db, "Mesas"), docData);
+            alert("Pedido feito com sucesso!");
+            clearInputs();
+        } catch (error) {
+            alert("Erro ao fazer pedido: " + error);
+        }
+    };
+
+    const clearInputs = () => {
+        setNumeroPedido('');
+        setNumeroMesa('');
+        setQuantidade('');
+        setNomePedido('');
+        setValorPedido('');
+    };
+
     return (
         <View style={{display:'flex',alignItems: 'center',top: 60,}}>
             <View style={styles.campoInput}>
@@ -11,6 +55,8 @@ export default function Inputs() {
                     placeholderTextColor={'#D8D8D8'}
                     style={styles.inputPedidos}
                     keyboardType="numeric"
+                    value={numeroPedido}
+                    onChangeText={setNumeroPedido}
                 ></TextInput>
             </View>
             <View style={styles.campoInput}>
@@ -20,6 +66,8 @@ export default function Inputs() {
                     placeholderTextColor={'#D8D8D8'}
                     style={styles.inputPedidos}
                     keyboardType="numeric"
+                    value={numeroMesa}
+                    onChangeText={setNumeroMesa}
                 ></TextInput>
             </View>
             <View style={styles.campoInput}>
@@ -29,11 +77,13 @@ export default function Inputs() {
                     placeholderTextColor={'#D8D8D8'}
                     style={styles.inputPedidos}
                     keyboardType="numeric"
+                    value={quantidade}
+                    onChangeText={setQuantidade}
                 ></TextInput>
             </View>
             <View>
-                <TouchableOpacity style={styles.btFazerPedidos} /*onPress={}*/ >
-                        <Text style={styles.txtButton}>Finalizar Mesa</Text>
+                <TouchableOpacity style={styles.btFazerPedidos} onPress={onPressFazerPedido} >
+                        <Text style={styles.txtButton}>Fazer Pedido</Text>
                 </TouchableOpacity>
             </View>
         </View>
