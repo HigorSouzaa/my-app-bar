@@ -2,6 +2,7 @@ import { StyleSheet, View } from 'react-native';
 import Main from './src/Telas/Main/main';
 import MenuFun from './src/Telas/MenuFun/menuFun'
 import TelaFazerPedidos from './src/Telas/TelaFazerPedidos/telaFazerPedido'
+import TelaFinalizarMesa from './src/Telas/TelaFinalizaMesa/finalizarMesa';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
 
@@ -9,12 +10,13 @@ const Stack = createStackNavigator();
 
 function MyStack() {
   return (
-      <Stack.Navigator initialRouteName="Main" screenOptions={{
+      <Stack.Navigator initialRouteName="TelaFinalizarMesa" screenOptions={{
         headerShown: false,
       }}>
         <Stack.Screen name="Main" component={Main} />
         <Stack.Screen name="MenuFun" component={MenuFun} />
         <Stack.Screen name="TelaFazerPedidos" component={TelaFazerPedidos} />
+        <Stack.Screen name="TelaFinalizarMesa" component={TelaFinalizarMesa} />
       </Stack.Navigator>
   );
 }
