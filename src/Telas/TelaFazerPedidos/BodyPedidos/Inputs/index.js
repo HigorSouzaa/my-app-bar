@@ -33,7 +33,7 @@ export default function Inputs() {
                         ValorTotal: valorTotal
                     };
     
-                    await addDoc(collection(db, "Mesas"), docData);
+                    await addDoc(collection(db, "Pedidos"), docData);
                     alert("Pedido feito com sucesso!");
                     clearInputs();
                 } else {

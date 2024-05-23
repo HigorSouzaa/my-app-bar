@@ -14,7 +14,7 @@ export default function Body() {
       
         Alert.alert(
           'Confirmação',
-          `Tem certeza que deseja fechar a mesa ` + numMesa + `?`,
+          `Tem certeza que deseja fechar a mesa nao tera como voltar atras?`,
           [
             {
               text: 'Cancelar',
@@ -24,22 +24,23 @@ export default function Body() {
               text: 'Sim',
               onPress: async () => {
                 try {
-                    const q = query(collection(db, 'Mesas'), where('Mesa', '==', numMesa));
+                    const q = query(collection(db, 'Pedidos'), where('Mesa', '==', numMesa));
                     const querySnapshot = await getDocs(q);
-
+        
                         if (!querySnapshot.empty) {
                             const batch = writeBatch(db);
                             querySnapshot.forEach(doc => {
                                 batch.delete(doc.ref);
                             });
                             await batch.commit();
-
-                            Alert.alert(`Mesa ` + numMesa + ` foi fechada com sucesso!`);
+        
+                            Alert.alert('Mesa ' + numMesa + ' foi fechada com sucesso!');
                         } else {
-                            Alert.alert(`Nenhuma mesa encontrada com o número ` + numMesa);
+                            Alert.alert('Nenhuma mesa encontrada com o número ' + numMesa);
                         }
                 } catch(erro) {
                     Alert.alert("Erro ao finalizar mesa: " + erro)
+                    console.log(erro)
                 }
                 clearInputs();
               },
@@ -66,7 +67,7 @@ export default function Body() {
                         style={styles.inputPedidos}
                         keyboardType="numeric"
                         value={numMesa}
-                        onChange={setNumMesa}
+                        onChangeText={setNumMesa}
                     />
             </View>
             <View style={{top: 80}}>
