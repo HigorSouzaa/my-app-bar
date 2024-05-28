@@ -5,18 +5,20 @@ import TelaFazerPedidos from './src/Telas/TelaFazerPedidos/telaFazerPedido'
 import TelaFinalizarMesa from './src/Telas/TelaFinalizaMesa/finalizarMesa';
 import { createStackNavigator } from '@react-navigation/stack';
 import { NavigationContainer } from '@react-navigation/native';
+import TelaEditarMesa from './src/Telas/TelaEditarMesa/telaEditarMesa';
 
 const Stack = createStackNavigator();
 
 function MyStack() {
   return (
-      <Stack.Navigator initialRouteName="TelaFinalizarMesa" screenOptions={{
+      <Stack.Navigator initialRouteName="TelaEditarMesa" screenOptions={{
         headerShown: false,
       }}>
         <Stack.Screen name="Main" component={Main} />
         <Stack.Screen name="MenuFun" component={MenuFun} />
         <Stack.Screen name="TelaFazerPedidos" component={TelaFazerPedidos} />
         <Stack.Screen name="TelaFinalizarMesa" component={TelaFinalizarMesa} />
+        <Stack.Screen name="TelaEditarMesa" component={TelaEditarMesa} />
       </Stack.Navigator>
   );
 }
