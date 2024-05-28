@@ -9,58 +9,61 @@ import {
   Alert, 
   Text
 } from 'react-native';
+import { useNavigation } from '@react-navigation/native';
 
   const PopUp = () => {
     const [visible, setVisible] = useState(false);
+    const navigation = useNavigation();
+
     const abrirMesa = () => {
       return Alert.alert('mesa aberta')
-  }
+    }
 
-  const fecharModal = () => {
-    return setVisible(false)
-  }
-  return (
-    <>
-      <TouchableOpacity onPress={() => setVisible(true)}>
-        <Image
-          source={require('../../../../assets/mesas.png')}
-          resizeMode="contain">
-        </Image>
-      </TouchableOpacity>
-      <Modal transparent visible={visible}>
-        <View style={styles.popUpContainer}>
-          <View style={styles.container_bt}>
-            <View style={styles.view_bt}> 
-              <TouchableOpacity >
-                <Text style={styles.btAbrir}>Abrir Mesa</Text>
-              </TouchableOpacity>
+    const fecharModal = () => {
+      return setVisible(false)
+    }
+    return (
+      <>
+        <TouchableOpacity onPress={() => setVisible(true)}>
+          <Image
+            source={require('../../../../assets/mesas.png')}
+            resizeMode="contain">
+          </Image>
+        </TouchableOpacity>
+        <Modal transparent visible={visible}>
+          <View style={styles.popUpContainer}>
+            <View style={styles.container_bt}>
+              <View style={styles.view_bt}> 
+                <TouchableOpacity >
+                  <Text style={styles.btAbrir}>Abrir Mesa</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.view_bt}> 
+                <TouchableOpacity onPress={ () => {navigation.navigate('TelaFinalizarMesa')}}>
+                  <Text style={styles.btAbrir}>Fechar Mesa</Text>
+                </TouchableOpacity>
+              </View>
             </View>
-            <View style={styles.view_bt}> 
-              <TouchableOpacity >
-                <Text style={styles.btAbrir}>Fechar Mesa</Text>
-              </TouchableOpacity>
+            <View style={styles.container_bt2}>
+              <View style={styles.view_bt}> 
+                <TouchableOpacity >
+                  <Text style={styles.btAbrir}>Editar Mesa</Text>
+                </TouchableOpacity>
+              </View>
+              <View style={styles.view_bt_fechar}> 
+                <TouchableOpacity onPress={fecharModal}>
+                  <View style={styles.btFechar}>
+                    <Image
+                      source={require('../../../../assets/x.png')}
+                      resizeMode="contain"
+                      style={{width:25}}>
+                    </Image>
+                  </View>
+                </TouchableOpacity>
+              </View>
             </View>
           </View>
-          <View style={styles.container_bt2}>
-            <View style={styles.view_bt}> 
-              <TouchableOpacity >
-                <Text style={styles.btAbrir}>Editar Mesa</Text>
-              </TouchableOpacity>
-            </View>
-            <View style={styles.view_bt_fechar}> 
-              <TouchableOpacity onPress={fecharModal}>
-                <View style={styles.btFechar}>
-                  <Image
-                    source={require('../../../../assets/x.png')}
-                    resizeMode="contain"
-                    style={{width:25}}>
-                  </Image>
-                </View>
-              </TouchableOpacity>
-            </View>
-          </View>
-        </View>
-    </Modal>
+      </Modal>
     </>
   );
 };
