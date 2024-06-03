@@ -4,11 +4,31 @@ import { StyleSheet, SafeAreaView, View, ScrollView, Text } from 'react-native';
 export default function ScrollViewPedidos() {
   return (
     <SafeAreaView style={styles.safeArea}>
+      <View style={styles.nomeTabela}>
+        <View>Nome</View>
+        <View>NumPedido</View>
+        <View>Quantidade</View>
+        <View>ValorTotal</View>
+      </View>
       <View style={styles.outerContainer}>
         <ScrollView contentContainerStyle={styles.scrollViewContent}>
           <View style={styles.sefaScrollView}>
             <View style={styles.nomePedido}>
+              <Text style={styles.txtColorNomePedidos}>P. Kibe G</Text>
+            </View>
+            <View style={styles.numPedido}>
+              <Text style={styles.txtColorPedidos}>1</Text>
+            </View>
+            <View style={styles.quantidade}>
+              <Text style={styles.txtColorPedidos}>1</Text>
+            </View>
+            <View style={styles.valorTotal}>
 
+            </View>
+          </View>
+          <View style={styles.sefaScrollView}>
+            <View style={styles.nomePedido}>
+              <Text style={styles.txtColorNomePedidos}>Heineken</Text>
             </View>
             <View style={styles.numPedido}>
               <Text style={styles.txtColorPedidos}>1</Text>
@@ -32,6 +52,12 @@ const styles = StyleSheet.create({
     backgroundColor: '#BA690B',
     alignItems: 'center',
   },
+  nomeTabela: {
+    width: 380,
+    backgroundColor: 'black',
+    height: 30,
+    marginTop: 450,
+  },
   outerContainer: {
     flex: 1,
     backgroundColor: '#FDD9B8',
@@ -40,7 +66,6 @@ const styles = StyleSheet.create({
     borderBottomLeftRadius: 30,
     borderBottomRightRadius: 30,
     elevation: 3,
-    marginTop: 450,
     width: 380,
     maxHeight: 350,
   },
@@ -65,7 +90,10 @@ const styles = StyleSheet.create({
     height: 60,
     borderRightWidth: 4,
     borderStyle: 'dotted',
-    borderColor: '#CE7A16'
+    borderColor: '#CE7A16',
+    justifyContent: 'center',
+    alignItems: 'flex-start',
+    marginLeft: 10
   },
   numPedido: {
     // backgroundColor: 'brown',
@@ -74,7 +102,9 @@ const styles = StyleSheet.create({
     borderRightWidth: 4,
     borderStyle: 'dotted',
     borderColor: '#CE7A16',
-    display: 'flex'
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
   },
   quantidade: {
     // backgroundColor: 'yellow',
@@ -83,7 +113,9 @@ const styles = StyleSheet.create({
     borderRightWidth: 4,
     borderStyle: 'dotted',
     borderColor: '#CE7A16',
-    display: 'flex'
+    display: 'flex',
+    justifyContent: 'center',
+    alignItems: 'center'
 
   },
   valorTotal: {
@@ -94,6 +126,10 @@ const styles = StyleSheet.create({
   },
   txtColorPedidos: {
     color: '#6C2121',
-    fontSize: 16
+    fontSize: 25
+  },
+  txtColorNomePedidos: {
+    color: '#6C2121',
+    fontSize: 20
   }
 });
