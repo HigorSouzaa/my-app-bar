@@ -1,70 +1,75 @@
 import React, { useState } from 'react';
-import { StyleSheet, SafeAreaView, View, ScrollView, Text, Image, TouchableOpacity, TextInput } from 'react-native';
+import { StyleSheet, SafeAreaView, View, ScrollView, Text, Image, TouchableOpacity, TextInput, Modal, Button } from 'react-native';
 
-const pedidosIniciais = [
+const initialPedidos = [
   { id: 1, nome: 'P. Kibe G', numero: 1, quantidade: 1, precoUnitario: 240 },
   { id: 2, nome: 'P. Esfiha', numero: 2, quantidade: 2, precoUnitario: 150 },
-  { id: 3, nome: 'P. Pastel', numero: 3, quantidade: 3, precoUnitario: 200 },
-  { id: 4, nome: 'P. Coxinha', numero: 4, quantidade: 1, precoUnitario: 180 },
-  { id: 5, nome: 'P. Bolinha', numero: 5, quantidade: 2, precoUnitario: 170 },
-  { id: 6, nome: 'P. Quibe', numero: 6, quantidade: 3, precoUnitario: 160 },
-  { id: 7, nome: 'P. Brigadeiro', numero: 7, quantidade: 1, precoUnitario: 150 },
-  { id: 8, nome: 'P. Beijinho', numero: 8, quantidade: 2, precoUnitario: 140 },
-  { id: 9, nome: 'P. Cajuzinho', numero: 9, quantidade: 3, precoUnitario: 130 },
-  { id: 10, nome: 'P. Bomba', numero: 10, quantidade: 1, precoUnitario: 120 },
+  { id: 3, nome: 'P. Pizza', numero: 3, quantidade: 1, precoUnitario: 150 },
+  { id: 4, nome: 'P. Pastel', numero: 4, quantidade: 3, precoUnitario: 60 },
+  { id: 5, nome: 'P. Coxinha', numero: 5, quantidade: 2, precoUnitario: 50 },
+  { id: 6, nome: 'P. Bolinho de Bacalhau', numero: 6, quantidade: 1, precoUnitario: 120 },
+  { id: 7, nome: 'P. Empada', numero: 7, quantidade: 1, precoUnitario: 90 },
+  { id: 8, nome: 'P. Brigadeiro', numero: 8, quantidade: 10, precoUnitario: 20 },
+  { id: 9, nome: 'P. Churros', numero: 9, quantidade: 5, precoUnitario: 15 },
+  { id: 10, nome: 'P. Tapioca', numero: 10, quantidade: 4, precoUnitario: 40 },
 ];
 
 export default function ScrollViewPedidos() {
-  const [pedidos, setPedidos] = useState(pedidosIniciais);
+  const [pedidos, setPedidos] = useState(initialPedidos);
+  const [isModalVisible, setModalVisible] = useState(false);
+  const [selectedPedido, setSelectedPedido] = useState(null);
+  const [editQuantidade, setEditQuantidade] = useState('');
 
-  const editarQuantidade = (id, novaQuantidade) => {
-    const pedidosAtualizados = pedidos.map(pedido => {
-      if (pedido.id === id) {
-        return { ...pedido, quantidade: novaQuantidade };
-      }
-      return pedido;
-    });
-    setPedidos(pedidosAtualizados);
+  const handleEdit = (pedido) => {
+    setSelectedPedido(pedido);
+    setEditQuantidade(pedido.quantidade.toString());
+    setModalVisible(true);
   };
 
-  const deletarPedido = (id) => {
-    const pedidosAtualizados = pedidos.filter(pedido => pedido.id !== id);
-    setPedidos(pedidosAtualizados);
+  const handleDelete = (id) => {
+    setPedidos(pedidos.filter(pedido => pedido.id !== id));
+  };
+
+  const handleSave = () => {
+    setPedidos(pedidos.map(pedido => {
+      if (pedido.id === selectedPedido.id) {
+        const novaQuantidade = parseInt(editQuantidade, 10);
+        const novoValorTotal = selectedPedido.precoUnitario * novaQuantidade;
+        return { ...pedido, quantidade: novaQuantidade, valorTotal: novoValorTotal };
+      }
+      return pedido;
+    }));
+    setModalVisible(false);
   };
 
   return (
-    <SafeAreaView style={estilos.safeArea}>
-      <View style={estilos.containerExterno}>
-        <ScrollView contentContainerStyle={estilos.conteudoScrollView}>
-          {pedidos.map(pedido => (
-            <View key={pedido.id} style={estilos.containerPedido}>
-              <View style={estilos.nomePedido}>
-                <Text style={estilos.textoNomePedido}>{pedido.nome}</Text>
+    <SafeAreaView style={styles.safeArea}>
+      <View style={styles.outerContainer}>
+        <ScrollView contentContainerStyle={styles.scrollViewContent}>
+          {pedidos.map((pedido) => (
+            <View key={pedido.id} style={styles.sefaScrollView}>
+              <View style={styles.nomePedido}>
+                <Text style={styles.txtColorNomePedidos}>{pedido.nome}</Text>
               </View>
-              <View style={estilos.numeroPedido}>
-                <Text style={estilos.textoPedido}>{pedido.numero}</Text>
+              <View style={styles.numPedido}>
+                <Text style={styles.txtColorPedidos}>{pedido.numero}</Text>
               </View>
-              <View style={estilos.quantidadePedido}>
-                <TextInput
-                  style={estilos.textoPedido}
-                  value={String(pedido.quantidade)}
-                  onChangeText={texto => editarQuantidade(pedido.id, parseInt(texto))}
-                  keyboardType="numeric"
-                />
+              <View style={styles.quantidade}>
+                <Text style={styles.txtColorPedidos}>{pedido.quantidade}</Text>
               </View>
-              <View style={estilos.valorTotal}>
-                <Text style={estilos.textoNomePedido}>R${pedido.precoUnitario * pedido.quantidade}</Text>
-                <TouchableOpacity onPress={() => editarQuantidade(pedido.id, pedido.quantidade)}>
-                  <Image
+              <View style={styles.valorTotal}>
+                <Text style={styles.txtColorNomePedidos}>R${pedido.precoUnitario * pedido.quantidade}</Text>
+                <TouchableOpacity onPress={() => handleEdit(pedido)}>
+                  <Image 
                     source={require('../../../../../assets/editar.png')}
-                    style={estilos.icone}
+                    style={styles.icon}
                     resizeMode="contain"
                   />
                 </TouchableOpacity>
-                <TouchableOpacity onPress={() => deletarPedido(pedido.id)}>
-                  <Image
+                <TouchableOpacity onPress={() => handleDelete(pedido.id)}>
+                  <Image 
                     source={require('../../../../../assets/lixo.png')}
-                    style={estilos.icone}
+                    style={styles.icon}
                     resizeMode="contain"
                   />
                 </TouchableOpacity>
@@ -73,17 +78,41 @@ export default function ScrollViewPedidos() {
           ))}
         </ScrollView>
       </View>
+
+      {selectedPedido && (
+        <Modal
+          visible={isModalVisible}
+          animationType="slide"
+          onRequestClose={() => setModalVisible(false)}
+        >
+          <View style={styles.modalContent}>
+            <Text>Quantidade:</Text>
+            <TextInput
+              style={styles.input}
+              value={editQuantidade}
+              keyboardType="numeric"
+              onChangeText={(text) => setEditQuantidade(text)}
+            />
+            <Button title="Salvar" onPress={handleSave} />
+            <Button title="Cancelar" onPress={() => setModalVisible(false)} />
+          </View>
+        </Modal>
+      )}
     </SafeAreaView>
   );
 }
 
-const estilos = StyleSheet.create({
+const styles = StyleSheet.create({
+  txtColorTabela: {
+    color: 'white',
+    fontSize: 14
+  },
   safeArea: {
     flex: 1,
     backgroundColor: '#BA690B',
     alignItems: 'center',
   },
-  containerExterno: {
+  outerContainer: {
     flex: 1,
     backgroundColor: '#FDD9B8',
     borderTopLeftRadius: 0,
@@ -95,10 +124,10 @@ const estilos = StyleSheet.create({
     maxHeight: 350,
     marginTop: 450,
   },
-  conteudoScrollView: {
+  scrollViewContent: {
     alignItems: 'center',
   },
-  containerPedido: {
+  sefaScrollView: {
     width: 370,
     height: 70,
     marginTop: 10,
@@ -119,7 +148,7 @@ const estilos = StyleSheet.create({
     alignItems: 'flex-start',
     marginLeft: 10
   },
-  numeroPedido: {
+  numPedido: {
     width: 50,
     height: 60,
     borderRightWidth: 4,
@@ -129,7 +158,7 @@ const estilos = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center'
   },
-  quantidadePedido: {
+  quantidade: {
     width: 50,
     height: 60,
     borderRightWidth: 4,
@@ -147,16 +176,28 @@ const estilos = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
   },
-  textoPedido: {
+  txtColorPedidos: {
     color: '#6C2121',
     fontSize: 20
   },
-  textoNomePedido: {
+  txtColorNomePedidos: {
     color: '#6C2121',
     fontSize: 20
   },
-  icone: {
+  icon: {
     width: 25,
     marginLeft: 15
+  },
+  modalContent: {
+    flex: 1,
+    justifyContent: 'center',
+    padding: 20,
+  },
+  input: {
+    height: 40,
+    borderColor: 'gray',
+    borderWidth: 1,
+    marginBottom: 20,
+    paddingHorizontal: 10,
   },
 });
