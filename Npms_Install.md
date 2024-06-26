@@ -1,4 +1,4 @@
-npm expo install @expo/vector-iconsVersionReact/my-app/Npms_Install.md
+~npm expo install @expo/vector-iconsVersionReact/my-app/Npms_Install.md
 npm install @fortawesome/fontawesome-svg-core @fortawesome/free-solid-svg-icons @fortawesome/react-native-fontawesome
 
 npx expo install react-native-web react-dom @expo/metro-runtime

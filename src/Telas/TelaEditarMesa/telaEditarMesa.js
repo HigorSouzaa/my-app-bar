@@ -8,9 +8,8 @@ export default function TelaEditarMesa() {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
-        {/* <CabecalhoPedido />
-        <Body></Body> */}
-        <ScrollViewPedidos></ScrollViewPedidos>
+        <CabecalhoPedido />
+        <Body></Body> 
       </View>
     </SafeAreaView>
   );
