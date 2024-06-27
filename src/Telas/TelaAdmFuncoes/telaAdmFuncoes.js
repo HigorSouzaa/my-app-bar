@@ -1,12 +1,12 @@
 import React from "react";
-import { View, Text, StyleSheet } from "react-native";
-import Cabecalho from "../Cabecalho/cabecalho";
+import { View, StyleSheet } from "react-native";
+import CabecalhoAdm from "../CabecalhoAdm/cabecalho";
 import Body from "./Body/body";
 
-export default function MenuFun() {
+export default function TelaAdmFuncoes() {
   return (
     <View style={styles.container}>
-      <Cabecalho></Cabecalho>
+      <CabecalhoAdm></CabecalhoAdm>
       <Body></Body>
     </View>
   );

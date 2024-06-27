@@ -1,13 +1,13 @@
-import React from 'react';
-import { StyleSheet, SafeAreaView, View } from 'react-native';
-import CabecalhoPedido from './CabecalhoPedidos/cabecalho';
-import BodyPedidos from './BodyPedidos/bodyPedidos';
+import React from "react";
+import { StyleSheet, SafeAreaView, View } from "react-native";
+import Cabecalho from "../Cabecalho/cabecalho";
+import BodyPedidos from "./BodyPedidos/bodyPedidos";
 
 export default function TelaFazerPedidos() {
   return (
     <SafeAreaView style={styles.safeArea}>
       <View style={styles.container}>
-        <CabecalhoPedido />
+        <Cabecalho />
         <BodyPedidos></BodyPedidos>
       </View>
     </SafeAreaView>
@@ -17,7 +17,7 @@ export default function TelaFazerPedidos() {
 const styles = StyleSheet.create({
   safeArea: {
     flex: 1,
-    backgroundColor: '#BA690B',
+    backgroundColor: "#BA690B",
   },
   container: {
     flex: 1,

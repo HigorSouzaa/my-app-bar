@@ -5,7 +5,7 @@ export default function Body() {
   return (
     <View style={styles.container_body}>
       <Image
-        source={require("../../../../assets/bodyFun.png")}
+        source={require("../../../../assets/bodyConfig.png")}
         resizeMode="contain"
       ></Image>
     </View>
@@ -15,6 +15,7 @@ export default function Body() {
 const styles = StyleSheet.create({
   container_body: {
     alignItems: "center",
-    marginTop: 120,
+    marginTop: 40,
+    marginLeft: -20,
   },
 });
