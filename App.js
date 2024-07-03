@@ -7,15 +7,16 @@ import { createStackNavigator } from "@react-navigation/stack";
 import { NavigationContainer } from "@react-navigation/native";
 import TelaEditarMesa from "./src/Telas/TelaEditarMesa/telaEditarMesa";
 import MenuAdm from "./src/Telas/MenuAdm/menuAdm";
-import TelaAdmFuncoes from "./src/Telas/TelaAdmFuncoes/TelaAdmFuncoes";
-import TelaCardastrarPedidos from "./src/Telas/TelaCardastrarPedidos/TelaCardastrarPedidos";
+import TelaCardastrarPedidos from "./src/Telas/TelaCardastrarPedidos/telaCardastrarPedidos";
+import TelaAdmFuncoes from "./src/Telas/TelaAdmFuncoes/telaAdmFuncoes";
+import TelaCadastroFuncionario from "./src/Telas/TelaCadastroFuncionario/telaCadastroFuncionario";
 
 const Stack = createStackNavigator();
 
 function MyStack() {
   return (
     <Stack.Navigator
-      initialRouteName="TelaCardastrarPedidos"
+      initialRouteName="TelaCadastroFuncionario"
       screenOptions={{
         headerShown: false,
       }}
@@ -27,8 +28,14 @@ function MyStack() {
       <Stack.Screen name="TelaFinalizarMesa" component={TelaFinalizarMesa} />
       <Stack.Screen name="TelaEditarMesa" component={TelaEditarMesa} />
       <Stack.Screen name="TelaAdmFuncoes" component={TelaAdmFuncoes} />
-      <Stack.Screen name="TelaCardastrarPedidos" component={TelaCardastrarPedidos} />
-
+      <Stack.Screen
+        name="TelaCadastroFuncionario"
+        component={TelaCadastroFuncionario}
+      />
+      <Stack.Screen
+        name="TelaCardastrarPedidos"
+        component={TelaCardastrarPedidos}
+      />
     </Stack.Navigator>
   );
 }

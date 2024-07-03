@@ -39,7 +39,7 @@ export default function Body() {
             try {
               const q = query(
                 collection(db, "Pedidos"),
-                where("Mesa", "==", numMesa)
+                where("Mesa", "==", parseInt(numMesa))
               );
               const querySnapshot = await getDocs(q);
 

@@ -36,7 +36,7 @@ export default function Inputs() {
           });
           const docData = {
             NumPedido: numPedido,
-            Mesa: numeroMesa,
+            Mesa: parseInt(numeroMesa),
             Quantidade: quantidade,
             NomePedido: tempNomePedido,
             ValorTotal: tempValorPedido,

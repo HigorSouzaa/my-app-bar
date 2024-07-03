@@ -25,7 +25,7 @@ export default function Cabecalho() {
           <PopUp></PopUp>
           <TouchableOpacity
             onPress={() => {
-              navigation.navigate("TelaFazerPedidos");
+              navigation.navigate("TelaAdmFuncoes");
             }}
           >
             <Image

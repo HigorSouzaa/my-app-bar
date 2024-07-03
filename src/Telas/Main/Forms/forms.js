@@ -44,7 +44,7 @@ function Forms() {
         if (userData.Senha === password) {
           if (userData.Adm === true) {
             Alert.alert(`Login feito com sucesso para ADM`);
-            navigation.navigate("MenuFun");
+            navigation.navigate("TelaAdmFuncoes");
           } else {
             Alert.alert(`Login feito com sucesso`);
           }

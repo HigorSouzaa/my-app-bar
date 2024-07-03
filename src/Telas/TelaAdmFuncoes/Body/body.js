@@ -1,7 +1,9 @@
 import React from "react";
 import { StyleSheet, View, Text, Image, TouchableOpacity } from "react-native";
+import { useNavigation } from "@react-navigation/native";
 
 export default function Body() {
+  const navigation = useNavigation();
   return (
     <View style={styles.container_body}>
       <View style={styles.conteiner_txt}>
@@ -15,7 +17,11 @@ export default function Body() {
           source={require("../../../../assets/Seta.png")}
           resizeMode="contain"
         ></Image>
-        <TouchableOpacity>
+        <TouchableOpacity
+          onPress={() => {
+            navigation.navigate("TelaCardastrarPedidos");
+          }}
+        >
           <Image
             source={require("../../../../assets/carrinhoCardapio.png")}
             resizeMode="contain"
