@@ -7,7 +7,7 @@ export default function Body() {
     <View style={styles.container_body}>
       <View style={styles.conteiner_txt}>
         <Image
-          source={require("../../../../assets/txtCadastrarPedidos.png")}
+          source={require("../../../../assets/txtCadastrarFuncionarios.png")}
           resizeMode="contain"
         ></Image>
       </View>
@@ -21,7 +21,7 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     width: "100%",
-    marginTop: 50,
+    marginTop: 60,
     gap: 25,
   },
 });

@@ -7,29 +7,32 @@ import {
   TouchableOpacity,
   Alert,
   Image,
+  Switch,
 } from "react-native";
 import db from "../../../services/firebaseConfig";
 import { addDoc, collection } from "firebase/firestore";
 
 export default function Inputs() {
-  const [numPedido, setNumPedido] = useState("");
-  const [nomePedido, setNomePedido] = useState("");
-  const [valor, setValor] = useState("");
+  const [nomeFuncionario, setNomeFuncionario] = useState("");
+  const [loginFuncionario, setLoginFuncionario] = useState("");
+  const [cpfFuncionario, setCpfFuncionario] = useState("");
+  const [isAdmin, setIsAdmin] = useState(false);
 
-  const onPressCadastrarProduto = async () => {
-    if (numPedido && nomePedido && valor) {
+  const onPressCadastrarFuncionario = async () => {
+    if (nomeFuncionario && loginFuncionario && cpfFuncionario) {
       try {
         const docData = {
-          NumPedido: parseInt(numPedido),
-          NomePedido: nomePedido,
-          Valor: valor,
+          Nome: nomeFuncionario,
+          Login: loginFuncionario,
+          Cpf: cpfFuncionario,
+          Adm: isAdmin,
         };
 
-        await addDoc(collection(db, "Cardapio"), docData);
-        alert("Produto cadastrado com sucesso!");
+        await addDoc(collection(db, "Users"), docData);
+        alert("Funcionário cadastrado com sucesso!");
         clearInputs();
       } catch (error) {
-        alert("Erro ao cadastrar produto: " + error);
+        alert("Erro ao cadastrar funcionário: " + error);
       }
     } else {
       Alert.alert("Preencha todos os campos!");
@@ -37,71 +40,76 @@ export default function Inputs() {
   };
 
   const clearInputs = () => {
-    setNumPedido("");
-    setNomePedido("");
-    setValor("");
+    setNomeFuncionario("");
+    setLoginFuncionario("");
+    setCpfFuncionario("");
+    setIsAdmin(false);
   };
 
   return (
-    <View style={{ display: "flex", alignItems: "center", top: 10 }}>
+    <View style={{ display: "flex", alignItems: "center", top: 25 }}>
       <View style={styles.campoInput}>
-        <Text style={styles.txtLabels}>Nome Pedido:</Text>
+        <Text style={styles.txtLabels}>Nome:</Text>
         <TextInput
-          placeholder="Nome do pedido"
+          placeholder="Nome"
           placeholderTextColor={"#D8D8D8"}
           style={styles.inputFields}
-          value={nomePedido}
-          onChangeText={setNomePedido}
+          value={nomeFuncionario}
+          onChangeText={setNomeFuncionario}
         />
       </View>
       <View style={styles.campoInput}>
-        <Text style={styles.txtLabels}>Num Pedido:</Text>
+        <Text style={styles.txtLabels}>Login:</Text>
         <TextInput
-          placeholder="0"
+          placeholder="Login"
           placeholderTextColor={"#D8D8D8"}
           style={styles.inputFields}
-          keyboardType="numeric"
-          value={numPedido}
-          onChangeText={setNumPedido}
+          value={loginFuncionario}
+          onChangeText={setLoginFuncionario}
         />
       </View>
       <View style={styles.campoInput}>
-        <Text style={styles.txtLabels}>Valor:</Text>
+        <Text style={styles.txtLabels}>CPF:</Text>
         <TextInput
-          placeholder="0.00"
+          placeholder="000.000.000-00"
           placeholderTextColor={"#D8D8D8"}
           style={styles.inputFields}
           keyboardType="numeric"
-          value={valor}
-          onChangeText={setValor}
+          value={cpfFuncionario}
+          onChangeText={setCpfFuncionario}
+        />
+      </View>
+      <View style={styles.campoInput}>
+        <Text style={styles.txtLabels}>Administrador:</Text>
+        <Switch
+          value={isAdmin}
+          onValueChange={setIsAdmin}
+          trackColor={{ false: "#767577", true: "#81b0ff" }}
+          thumbColor={isAdmin ? "#f5dd4b" : "#f4f3f4"}
         />
       </View>
       <View>
         <TouchableOpacity
-          style={styles.btCadastrarProduto}
-          onPress={onPressCadastrarProduto}
+          style={styles.btCadastrarFuncionario}
+          onPress={onPressCadastrarFuncionario}
         >
-          <Text style={styles.txtButton}>Cadastrar Produto</Text>
+          <Text style={styles.txtButton}>Cadastrar Funcionário</Text>
         </TouchableOpacity>
       </View>
-      <Image
-        source={require("../../../../assets/img1.2.png")}
-        resizeMode="contain"
-      ></Image>
     </View>
   );
 }
 
 const styles = StyleSheet.create({
-  btCadastrarProduto: {
+  btCadastrarFuncionario: {
     backgroundColor: "#CE7A16",
     borderRadius: 15,
-    width: 250,
+    width: 290,
     padding: 10,
     display: "flex",
     justifyContent: "center",
     alignItems: "center",
-    top: 30,
+    top: 60,
     marginBottom: 20,
     borderWidth: 2,
     borderColor: "#FFFFFF",

@@ -39,7 +39,10 @@ export default function Body() {
           source={require("../../../../assets/Seta.png")}
           resizeMode="contain"
         ></Image>
-        <TouchableOpacity>
+        <TouchableOpacity 
+          onPress={() => {
+            navigation.navigate("TelaCadastroFuncionario")
+          }}>
           <Image
             source={require("../../../../assets/Personagem.png")}
             resizeMode="contain"
